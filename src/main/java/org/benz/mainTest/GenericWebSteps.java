@@ -1,24 +1,16 @@
 package org.benz.mainTest;
 
-import org.benz.dataproviders.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+
 import static org.benz.WebDrivers.driver;
 
 public class GenericWebSteps {
-
-    public void openPortal() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(Constants.URL);
-    }
     public void selectState() {
         driver.findElement(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']"));
         List<WebElement> options = driver.findElements(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']//option[contains(text(), 'New South Wales')]"));
@@ -33,6 +25,7 @@ public class GenericWebSteps {
     }
     public void inputPostalCod() {
         driver.findElement(By.xpath("//wb-input-control[@class='hydrated']")).sendKeys("2007");
+
     }public void selectPurpose() {
         driver.findElement(By.xpath("//div[@class='dcp-radio__options-container']//input[@value='P']")).click();
     }
@@ -110,6 +103,9 @@ public class GenericWebSteps {
     public void clickEnquiryNowButton() {
         driver.findElement(By.xpath("//button[@data-datadog-id='buybox-leadform']//span")).click();
     }
+
+
+
 }
 
 //public void checkIfDisplayed(By locator) {
