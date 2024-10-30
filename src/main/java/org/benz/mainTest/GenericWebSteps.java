@@ -1,8 +1,8 @@
 package org.benz.mainTest;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,30 @@ import static org.benz.WebDrivers.driver;
 
 public class GenericWebSteps {
     public void selectState() {
-        driver.findElement(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']"));
+        WebElement element = driver.findElement(By.xpath("//cmm-cookie-banner[@settings-id='Kvbnw4-6_']"));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        WebElement shadow1= (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
+
+        WebElement header = shadow1.findElement(By.xpath("//div[@class='cmm-cookie-banner__content']"));
+
+        WebElement header2 = header.findElement(By.xpath("//div[@class='cmm-cookie-banner__content']"));
+        WebElement header3 = header2.findElement(By.tagName("wb7-button"));
+
+
+        header3.findElement(By.cssSelector("button#button"));
+
+      //  header3.findElement(By.cssSelector("div.cmm-cookie-banner__content")).click();
+
+
+
+
+
+
+        //------------------------------
+        //   driver.findElement(By.xpath("//div[@class='wb-modal-edit-content__section']//wb-select-control[@class='dcp-header-location-modal-dropdown hydrated']"));
+     /*   driver.findElement(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']"));
         List<WebElement> options = driver.findElements(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']//option[contains(text(), 'New South Wales')]"));
         for (WebElement option : options) {
             if (option.getText().equals("New South Wales")) {
@@ -21,12 +44,16 @@ public class GenericWebSteps {
             }
         }
         String testSelect = driver.findElement(By.xpath("//wb-select-control[@class='dcp-header-location-modal-dropdown hydrated']//span[contains(@class, 'selected')]")).getText();
-        System.out.println(testSelect); // validating
+     System.out.println(testSelect); // validating
+        // */
     }
+
     public void inputPostalCod() {
         driver.findElement(By.xpath("//wb-input-control[@class='hydrated']")).sendKeys("2007");
 
-    }public void selectPurpose() {
+    }
+
+    public void selectPurpose() {
         driver.findElement(By.xpath("//div[@class='dcp-radio__options-container']//input[@value='P']")).click();
     }
 
@@ -103,7 +130,6 @@ public class GenericWebSteps {
     public void clickEnquiryNowButton() {
         driver.findElement(By.xpath("//button[@data-datadog-id='buybox-leadform']//span")).click();
     }
-
 
 
 }
