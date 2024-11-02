@@ -2,11 +2,12 @@ package org.benz.mainTest;
 
 import org.benz.WebDrivers;
 import org.benz.pages.browser.BrowserSteps;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 
 
 public class PriceEnquiryTest extends GenericWebSteps {
@@ -14,22 +15,22 @@ public class PriceEnquiryTest extends GenericWebSteps {
     private GenericWebSteps genericWebSteps;
     private BrowserSteps browserSteps;
 
+    private static final String rootOne = "//cmm-cookie-banner[@class='hydrated']";
+
     @BeforeMethod
     public void setUp() throws InterruptedException {
         browserSteps = new BrowserSteps();
         browserSteps.openPortal();
     }
+
     @Test
     public void testPriceEnquiry() {
         genericWebSteps = new GenericWebSteps();
 
+        genericWebSteps.clickAgreeToAll();
 
 
-
-
-
-
-         genericWebSteps.selectState();
+        //genericWebSteps.selectState();
 
         // 1. write code for wait till Policy Accept dialog opens.
 
@@ -47,17 +48,17 @@ public class PriceEnquiryTest extends GenericWebSteps {
 
         // 5. write the code to click on filter button on the next page
         //genericWebSteps_toCheck.checkIfDisplayed(); write code to validate of explore page opens
-       //* genericWebSteps.clickFilterButton();
+        //* genericWebSteps.clickFilterButton();
 
 
         // 6.click on preowned tab
-       // genericWebSteps.selectPreOwnedTab();
-       // genericWebSteps.clickAllFiltersButton(); // to click on all filters button under preowned page/
+        // genericWebSteps.selectPreOwnedTab();
+        // genericWebSteps.clickAllFiltersButton(); // to click on all filters button under preowned page/
 
 
         // 7. click on color and select blue color
-     //   genericWebSteps.clickColorFilterButton();
-     //   genericWebSteps.selectBlueColorOption();
+        //   genericWebSteps.clickColorFilterButton();
+        //   genericWebSteps.selectBlueColorOption();
         //genericWebSteps.clickShowAvailableVehiclesButton();
 
 
@@ -66,7 +67,7 @@ public class PriceEnquiryTest extends GenericWebSteps {
 
 
         // 9. click on top priced vin and fetch the vin number and model year of the top priced card
-       //   genericWebSteps.clickTopPriceVin();
+        //   genericWebSteps.clickTopPriceVin();
 
         // 10.  save to a file- done
         //  genericWebSteps.saveVinInformation();
@@ -79,6 +80,7 @@ public class PriceEnquiryTest extends GenericWebSteps {
         // 13. click submit and handle this negative test
 
     }
+
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
@@ -88,6 +90,7 @@ public class PriceEnquiryTest extends GenericWebSteps {
             // Close the browser if the test passed
             browserSteps.quitDriver();
         }
+        browserSteps.quitDriver();
     }
 }
 /*}
