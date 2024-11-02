@@ -1,12 +1,15 @@
 package org.benz.mainTest;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.time.Duration;
 
+import java.util.NoSuchElementException;
 
 import static org.benz.WebDrivers.driver;
 
@@ -16,7 +19,7 @@ public class GenericWebSteps {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        WebElement shadow1= (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
+        WebElement shadow1 = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
 
         WebElement header = shadow1.findElement(By.xpath("//div[@class='cmm-cookie-banner__content']"));
 
@@ -26,12 +29,7 @@ public class GenericWebSteps {
 
         header3.findElement(By.cssSelector("button#button"));
 
-      //  header3.findElement(By.cssSelector("div.cmm-cookie-banner__content")).click();
-
-
-
-
-
+        //  header3.findElement(By.cssSelector("div.cmm-cookie-banner__content")).click();
 
         //------------------------------
         //   driver.findElement(By.xpath("//div[@class='wb-modal-edit-content__section']//wb-select-control[@class='dcp-header-location-modal-dropdown hydrated']"));
@@ -50,7 +48,6 @@ public class GenericWebSteps {
 
     public void inputPostalCod() {
         driver.findElement(By.xpath("//wb-input-control[@class='hydrated']")).sendKeys("2007");
-
     }
 
     public void selectPurpose() {
@@ -131,6 +128,25 @@ public class GenericWebSteps {
         driver.findElement(By.xpath("//button[@data-datadog-id='buybox-leadform']//span")).click();
     }
 
+    public void clickAgreeToAll() {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).
+                pollingEvery(Duration.ofMillis(250)).
+                withTimeout(Duration.ofSeconds(10)).
+                ignoring(NoSuchElementException.class);
+
+        WebElement shadowHost1 = wait.until(driver -> driver.findElement(By.xpath("//cmm-cookie-banner[@settings-id='Kvbnw4-6_']")));
+        SearchContext searchContext = shadowHost1.getShadowRoot();
+
+        Wait<SearchContext> wait2 = new FluentWait<SearchContext>(searchContext).
+                pollingEvery(Duration.ofMillis(250)).
+                withTimeout(Duration.ofSeconds(10)).ignoring(NoSuchElementException.class);
+
+        WebElement shadowHost2 = wait2.until(searchContext1 -> searchContext.findElement(By.xpath("//cmm-buttons-wrapper//wb7-button[data-test='toggle-cookie-details']")));
+
+        SearchContext searchContext2 = shadowHost2.getShadowRoot();
+        WebElement shadow3 = searchContext2.findElement(By.xpath("//button/slot"));
+        shadow3.getShadowRoot().findElement(By.xpath("//button/slot")).click();
+    }
 
 }
 
