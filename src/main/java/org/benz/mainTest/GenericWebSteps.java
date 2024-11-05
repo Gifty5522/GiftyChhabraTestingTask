@@ -12,47 +12,19 @@ import static org.benz.WebDrivers.driver;
 
 public class GenericWebSteps {
     public void selectState() {
-        WebElement element = driver.findElement(By.xpath("//cmm-cookie-banner[@settings-id='Kvbnw4-6_']"));
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        WebElement shadow1= (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
-
-        WebElement header = shadow1.findElement(By.xpath("//div[@class='cmm-cookie-banner__content']"));
-
-        WebElement header2 = header.findElement(By.xpath("//div[@class='cmm-cookie-banner__content']"));
-        WebElement header3 = header2.findElement(By.tagName("wb7-button"));
-
-
-        header3.findElement(By.cssSelector("button#button"));
-
-      //  header3.findElement(By.cssSelector("div.cmm-cookie-banner__content")).click();
-
-
-
-
-
-
-        //------------------------------
-        //   driver.findElement(By.xpath("//div[@class='wb-modal-edit-content__section']//wb-select-control[@class='dcp-header-location-modal-dropdown hydrated']"));
-     /*   driver.findElement(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']"));
-        List<WebElement> options = driver.findElements(By.xpath("//header[@class='dcp-shop__header']//div[4]//wb-select//select[@id='2q0fb1m9n']//option[contains(text(), 'New South Wales')]"));
-        for (WebElement option : options) {
-            if (option.getText().equals("New South Wales")) {
-                option.click();
-                break;
-            }
-        }
-        String testSelect = driver.findElement(By.xpath("//wb-select-control[@class='dcp-header-location-modal-dropdown hydrated']//span[contains(@class, 'selected')]")).getText();
-     System.out.println(testSelect); // validating
-        // */
+       JavascriptExecutor jse = (JavascriptExecutor) driver;
+        WebElement agreeBtn= (WebElement) jse.executeScript("return document.querySelector('cmm-cookie-banner').shadowRoot.querySelector('div').querySelector('div').querySelector('cmm-buttons-wrapper').querySelector('wb7-button:nth-of-type(2) ').shadowRoot.querySelector('button.button')");
+       ((JavascriptExecutor)driver).executeScript("arguments[0].click();", agreeBtn);
     }
 
+    //also write code for validate if the state is selected, then postal code will be enabled.
     public void inputPostalCod() {
-        driver.findElement(By.xpath("//wb-input-control[@class='hydrated']")).sendKeys("2007");
+        driver.findElement(By.xpath("//wb-input-control[@class='hydrated']//input[@aria-labelledby='postal-code-hint']")).sendKeys("2007");
 
     }
 
+  //  also write code for validate if the postal code is input, then radio btton  will be enabled
     public void selectPurpose() {
         driver.findElement(By.xpath("//div[@class='dcp-radio__options-container']//input[@value='P']")).click();
     }
@@ -81,12 +53,13 @@ public class GenericWebSteps {
         driver.findElement(By.xpath("//div[@class= 'emh-side-filters-category-filter-template__content-wrapper']//wb-checkbox-control[2]//wb-icon//*[name()='svg']//*[name()=\"path\" and @d=\"M5.817 13.048 2 8.308l1.29-1.036 2.606 3.24 6.88-7.552L14 4.074z\"]")).click();
     }
 
-    public void clickShowAvailableVehiclesButton() {
-        driver.findElement(By.xpath("//button[@data-test-id= 'emh-side-filters-modal__show-cars-button']//wb-icon//*[name()='svg']//*[name()=\"path\"and @d=\"M12 14.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z\"]")).click();
-    }
+//    not displaying now on site.
+  //  public void clickShowAvailableVehiclesButton() {
+    //    driver.findElement(By.xpath("//button[@data-test-id= 'emh-side-filters-modal__show-cars-button']//wb-icon//*[name()='svg']//*[name()=\"path\"and @d=\"M12 14.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z\"]")).click();
+   // }
 
     public void selectSorting() {
-        Select sortList = new Select(driver.findElement(By.xpath("//select[@id='husofteou1']")));
+        Select sortList = new Select(driver.findElement(By.xpath("//div[@class='dcp-cars-srp__sorting-dropdown']//select[@id='tn1g14g00c']")));
         sortList.selectByVisibleText("Price: High to Low");
         String confirmSelection = sortList.getFirstSelectedOption().getText();
         System.out.println(confirmSelection);// validating

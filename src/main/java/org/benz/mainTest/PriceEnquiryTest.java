@@ -18,16 +18,11 @@ public class PriceEnquiryTest extends GenericWebSteps {
     public void setUp() throws InterruptedException {
         browserSteps = new BrowserSteps();
         browserSteps.openPortal();
+        //browserSteps.wait(20);
     }
     @Test
     public void testPriceEnquiry() {
         genericWebSteps = new GenericWebSteps();
-
-
-
-
-
-
 
          genericWebSteps.selectState();
 
@@ -49,21 +44,23 @@ public class PriceEnquiryTest extends GenericWebSteps {
         //genericWebSteps_toCheck.checkIfDisplayed(); write code to validate of explore page opens
        //* genericWebSteps.clickFilterButton();
 
-
         // 6.click on preowned tab
        // genericWebSteps.selectPreOwnedTab();
        // genericWebSteps.clickAllFiltersButton(); // to click on all filters button under preowned page/
+
+        //after filter button is clicked, again handle this Agree to all button on cookie box.
 
 
         // 7. click on color and select blue color
      //   genericWebSteps.clickColorFilterButton();
      //   genericWebSteps.selectBlueColorOption();
-        //genericWebSteps.clickShowAvailableVehiclesButton();
+
+
+        //genericWebSteps.clickShowAvailableVehiclesButton(); ot displaying on the site now.
 
 
         // 8. click on sorting button and select Price high to low
         //genericWebSteps.selectSorting();
-
 
         // 9. click on top priced vin and fetch the vin number and model year of the top priced card
        //   genericWebSteps.clickTopPriceVin();
